@@ -6,6 +6,7 @@ employees_ = [{'query': 'employees', 'val': '%s, %s, %s, %s, %s, %s', 'read_csv'
               {'query': 'customers', 'val': '%s, %s, %s', 'read_csv': 'north_data/customers_data.csv'},
               {'query': 'orders', 'val': '%s, %s, %s, %s, %s', 'read_csv': 'north_data/orders_data.csv'}]
 
+
 def execute():
     for e in employees_:
         cur.executemany(f"INSERT INTO {e['query']} VALUES ({e['val']})", read_csv({e['read_csv']}))
@@ -14,13 +15,13 @@ def execute():
         for row in rows:
             print(row)
 
+
 # connect to db
-with psycopg2.connect(host="localhost", port=5432, database='north', user='postgres', password='123456') as conn:
+with psycopg2.connect(host="localhost", database='north', user='postgres', password='123456') as conn:
     with conn.cursor() as cur:
         execute()
 
 conn.close()
-
 
 # execute query
 # cur.executemany("INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s)", read_csv("north_data/employees_data"
