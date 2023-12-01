@@ -3,29 +3,29 @@
 CREATE TABLE customers
 -- клиенты
 (
-	customer_id VARCHAR(50) PRIMARY KEY,
-	company_name varchar(100) NOT NULL,
-	contact_name varchar(100) NOT NULL,
+	customer_id varchar(15) PRIMARY KEY,
+	company_name varchar(50),
+	contact_name varchar(50),
 
 );
 
 CREATE TABLE employees
 --сотрудники
 (
-	employee_id SERIAL PRIMARY KEY,
-	first_name varchar(100) NOT NULL,
-	last_name varchar(100) NOT NULL,
-	title varchar(100) NOT NULL,
+	employee_id int PRIMARY KEY,
+	first_name varchar(40) NOT NULL,
+	last_name varchar(40) NOT NULL,
+	title varchar(200) NOT NULL,
 	birth_date date,
-	notes text,
+	notes text
 );
 
 CREATE TABLE orders
 --заказы. связь и с сотрудниками и с клиентами
 (
 	order_id SERIAL PRIMARY KEY
-	customer_id varchar(100) NOT NULL
-	employee_id int
+	customer_id varchar(30) REFERENCES customers(customer_id) NOT NULL
+	employee_id int REFERENCES employees(employee_id)
 	order_date date
-	ship_city varchar(100) NOT NULL
+	ship_city varchar(30) NOT NULL
 );
